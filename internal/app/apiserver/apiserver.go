@@ -13,6 +13,7 @@ import (
 	"wallet/internal/repository"
 	"wallet/internal/service"
 
+	"github.com/shopspring/decimal"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -93,6 +94,11 @@ func initDatabase() (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	player1 := models.Player{Balance: decimal.NewFromFloat(250), Currency: "EUR"}
+	player2 := models.Player{Balance: decimal.NewFromFloat(500), Currency: "USD"}
+	db.Create(&player1)
+	db.Create(&player2)
 
 	return db, nil
 
